@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./css/style.css" rel="stylesheet" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+</head>
+<body>
+   
+    <body>
+        <div class="grid grid-cols-6">
+          <div class="col-start-3 col-span-2">
+            <%- include("header.ejs") %> 
+            <a href="/signout" > Signout</a>
+            <form action="/todo/<%=id%>/notes" method="post">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <div class="flex gap-2 py-4">
+                <div class="flex-auto">
+                    <div class="mb-4">
+                        <input id="note"    name="notes" rows="4" placeholder=" Add Notes" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm"/>
+                    </div>
+                  
+                </div>
+               
+                <div class="flex-none">
+                  <button
+                    type="submit"
+                    class="bg-green-600 text-white px-5 py-1.5 rounded font-medium mr-2 mb-2"
+                  >
+                    AddNotes
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <% if(messages && messages.success && messages.success.length > 0)  { %>
+                <% for(var i=0; i<messages.success.length; i++) { %>
+                        <li> <%= messages.success[i] %></li>
+                <% } %>
+              <% } %>
+    
+</body>
+</html>
